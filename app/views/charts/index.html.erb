@@ -1,0 +1,33 @@
+<h1 class="text-2xl font-bold mb-4">Area Chart Example</h1>
+
+<div id="area-chart" class="w-full h-96"></div>
+
+<%= javascript_include_tag "https://cdn.jsdelivr.net/npm/apexcharts" %>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var options = {
+    chart: {
+      type: 'area',
+      height: 350
+    },
+    series: gon.chart_data.series,
+    xaxis: gon.chart_data.xaxis,
+    stroke: {
+      curve: 'smooth'
+    },
+    fill: {
+      type: 'gradient',
+      gradient: {
+        shadeIntensity: 1,
+        opacityFrom: 0.7,
+        opacityTo: 0.9,
+        stops: [0, 90, 100]
+      }
+    }
+  };
+
+  var chart = new ApexCharts(document.querySelector("#area-chart"), options);
+  chart.render();
+});
+</script>

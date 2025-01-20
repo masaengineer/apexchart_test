@@ -2910,6 +2910,10 @@ html:has(.drawer-toggle:checked) {
   height: 1.5rem;
 }
 
+.h-96 {
+  height: 24rem;
+}
+
 .min-h-\[50vh\] {
   min-height: 50vh;
 }

@@ -30,3 +30,6 @@
 !/tmp/storage/.keep
 
 /public/assets
+
+# Ignore vendor directory
+/vendor/
