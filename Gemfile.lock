@@ -78,6 +78,7 @@ GEM
       mutex_m
       securerandom (>= 0.3)
       tzinfo (~> 2.0)
+    apexcharts (0.2.0)
     base64 (0.2.0)
     benchmark (0.4.0)
     bigdecimal (3.1.9)
@@ -97,6 +98,13 @@ GEM
     drb (2.2.1)
     erubi (1.13.1)
     ffi (1.17.1-aarch64-linux-gnu)
+    ffi (1.17.1-aarch64-linux-musl)
+    ffi (1.17.1-arm-linux-gnu)
+    ffi (1.17.1-arm-linux-musl)
+    ffi (1.17.1-arm64-darwin)
+    ffi (1.17.1-x86_64-darwin)
+    ffi (1.17.1-x86_64-linux-gnu)
+    ffi (1.17.1-x86_64-linux-musl)
     globalid (1.2.1)
       activesupport (>= 6.1)
     hotwire-livereload (2.0.0)
@@ -248,6 +256,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  apexcharts
   bootsnap
   cssbundling-rails
   debug

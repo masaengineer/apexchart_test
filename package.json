@@ -4,12 +4,17 @@
   "dependencies": {
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^8.0.0",
-    "daisyui": "^4.7.2"
+    "apexcharts": "^3.45.0",
+    "daisyui": "^4.7.2",
+    "postcss": "^8.5.1"
   },
   "scripts": {
-    "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=/assets --external:@hotwired/* --external:daisyui --format=esm",
-    "build:watch": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=/assets --external:@hotwired/* --external:daisyui --format=esm --watch",
+    "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=/assets --external:@hotwired/* --external:daisyui --format=iife",
+    "build:watch": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=/assets --external:@hotwired/* --external:daisyui --format=iife --watch",
     "build:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css --minify",
     "build:css:watch": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css --watch"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.2"
   }
 }

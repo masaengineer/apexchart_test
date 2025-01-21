@@ -5,6 +5,10 @@ window.Turbo = Turbo;
 import { Application } from '@hotwired/stimulus';
 import { registerControllers } from './controllers';
 
+// Import ApexCharts
+import ApexCharts from 'apexcharts';
+window.ApexCharts = ApexCharts;
+
 const application = Application.start();
 registerControllers(application);
 
