@@ -30,3 +30,9 @@
 !/tmp/storage/.keep
 
 /public/assets
+
+# Ignore node_modules directory
+/node_modules
+
+# Ignore vendor directory
+/vendor
