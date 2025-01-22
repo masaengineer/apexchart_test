@@ -1,16 +1,15 @@
 // Entry point for the build script in your package.json
-import { Turbo } from '@hotwired/turbo-rails';
+import { Turbo } from "@hotwired/turbo-rails"
 window.Turbo = Turbo;
 
-import { Application } from '@hotwired/stimulus';
-import { registerControllers } from './controllers';
+import { Application } from "@hotwired/stimulus"
+import { registerControllers } from './controllers'
 
-// Import ApexCharts
-import ApexCharts from 'apexcharts';
-window.ApexCharts = ApexCharts;
+import ChartController from './controllers/chart_controller'
 
 const application = Application.start();
 registerControllers(application);
+application.register('chart', ChartController);
 
 // DaisyUI theme controller
 document.addEventListener('turbo:load', () => {

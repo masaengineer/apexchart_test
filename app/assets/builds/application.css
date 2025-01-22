@@ -2873,6 +2873,10 @@ html:has(.drawer-toggle:checked) {
   margin-top: 0px;
 }
 
+.static {
+  position: static;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
