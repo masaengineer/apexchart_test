@@ -6,8 +6,13 @@ Sidekiq.configure_server do |config|
 
   # Sidekiq-schedulerの設定
   config.on(:startup) do
-    Sidekiq.schedule = YAML.load_file(File.expand_path('../../sidekiq.yml', __FILE__))
-    SidekiqScheduler::Scheduler.instance.reload_schedule!
+    schedule_file = Rails.root.join('config', 'sidekiq.yml')
+    if File.exist?(schedule_file)
+      # スケジューラを有効化
+      Sidekiq::Scheduler.enabled = true
+      # スケジュールの再読み込み
+      Sidekiq::Scheduler.reload_schedule!
+    end
   end
 end
 

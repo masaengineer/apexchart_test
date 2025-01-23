@@ -4,7 +4,9 @@
   - mailers
 
 :scheduler:
+  :enabled: true
   :schedule:
     ebay_fetch_orders_job:
       cron: '0 * * * *' # 毎時0分に実行
       class: EbayFetchOrdersJob
+      queue: default

@@ -1,0 +1,42 @@
+<div class="container mx-auto px-4 py-8">
+  <div class="mb-4">
+    <%= link_to '← 一覧に戻る', ebay_orders_path, class: 'btn btn-ghost' %>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title">注文詳細 #<%= @ebay_order.order_id %></h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+        <div>
+          <h3 class="text-lg font-semibold mb-2">基本情報</h3>
+          <table class="table">
+            <tr>
+              <th>購入者</th>
+              <td><%= @ebay_order.buyer_username %></td>
+            </tr>
+            <tr>
+              <th>注文金額</th>
+              <td><%= @ebay_order.total_price %></td>
+            </tr>
+            <tr>
+              <th>ステータス</th>
+              <td><%= @ebay_order.order_status %></td>
+            </tr>
+            <tr>
+              <th>注文日時</th>
+              <td><%= @ebay_order.created_date %></td>
+            </tr>
+          </table>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-2">JSON データ</h3>
+          <div class="bg-base-200 p-4 rounded-lg overflow-auto max-h-96">
+            <pre><code><%= JSON.pretty_generate(@ebay_order.order_data) %></code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
