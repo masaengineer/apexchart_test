@@ -1,0 +1,36 @@
+<div class="container mx-auto">
+  <h1 class="text-2xl font-bold mb-6">eBay受注一覧</h1>
+
+  <div class="overflow-x-auto">
+    <table class="table w-full">
+      <thead>
+        <tr>
+          <th>注文ID</th>
+          <th>購入者</th>
+          <th>金額</th>
+          <th>ステータス</th>
+          <th>注文日時</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @ebay_orders.each do |order| %>
+          <tr>
+            <td><%= order.order_id %></td>
+            <td><%= order.buyer_username %></td>
+            <td><%= order.total_price %></td>
+            <td><%= order.order_status %></td>
+            <td><%= order.created_date %></td>
+            <td>
+              <%= link_to '詳細', ebay_order_path(order.order_id), class: 'btn btn-primary btn-sm' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="mt-4">
+    <%= paginate @ebay_orders %>
+  </div>
+</div>
