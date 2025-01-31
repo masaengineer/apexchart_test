@@ -36,3 +36,5 @@
 
 # Ignore vendor directory
 /vendor
+
+/config/master.key
