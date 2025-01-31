@@ -4,12 +4,19 @@ module Ebay
 
     def initialize(access_token)
       @access_token = access_token
+
       @connection = Faraday.new(url: BASE_URL) do |faraday|
         faraday.request :url_encoded
         faraday.headers['Authorization'] = "Bearer #{@access_token}"
-        faraday.headers['Content-Type'] = 'application/json'
+        faraday.headers['Accept'] = 'application/json'
         faraday.adapter Faraday.default_adapter
+
+        # リクエストとレスポンスのログを追加
+        faraday.response :logger, Rails.logger, { headers: true, bodies: true }
       end
+
+      # デバッグ用：ヘッダーの内容を確認
+      puts "Authorization Header: Bearer #{@access_token}"
     end
 
     def get_orders(limit: 50, offset: 0)

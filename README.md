@@ -84,16 +84,11 @@ bin/dev
 - `POSTGRES_HOST`
 - `POSTGRES_USER`
 - `POSTGRES_PASSWORD`
-
-# master.key ファイルの存在確認
-
-ls config/master.key
-
-# credentials ファイルの存在確認
-
-ls config/credentials.yml.enc
+- `RAILS_MASTER_KEY`
 
 # ファイルの内容を確認
-
 cat config/master.key
 cat config/credentials.yml.enc
+
+# クレデンシャルファイルの編集
+docker compose run --rm -e EDITOR=vim web rails credentials:edit
