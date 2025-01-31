@@ -47,15 +47,16 @@ module Ebay
     end
 
     def refresh_access_token(refresh_token)
+      Rails.logger.debug "Attempting to refresh token with: #{refresh_token}"
       response = @connection.post do |req|
-        req.headers.merge!(authorization_header)
-        req.headers['Content-Type'] = 'application/x-www-form-urlencoded'
-        req.params = {
+        req.headers = authorization_header.merge('Content-Type' => 'application/x-www-form-urlencoded')
+        req.body = URI.encode_www_form({
           grant_type: 'refresh_token',
           refresh_token: refresh_token
-        }
+        })
       end
 
+      Rails.logger.debug "Token refresh response: #{response.body}"
       response.body
     end
 
