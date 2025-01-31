@@ -1,28 +1,46 @@
-<div class="container mx-auto">
-  <h1 class="text-2xl font-bold mb-6">eBay受注一覧</h1>
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-2xl font-bold mb-6">eBay注文一覧</h1>
+
+  <% if flash[:error].present? %>
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4" role="alert">
+      <%= flash[:error] %>
+    </div>
+  <% end %>
 
   <div class="overflow-x-auto">
-    <table class="table w-full">
+    <table class="min-w-full bg-white border border-gray-300">
       <thead>
-        <tr>
-          <th>注文ID</th>
-          <th>購入者</th>
-          <th>金額</th>
-          <th>ステータス</th>
-          <th>注文日時</th>
-          <th>操作</th>
+        <tr class="bg-gray-100">
+          <th class="px-6 py-3 border-b text-left">注文ID</th>
+          <th class="px-6 py-3 border-b text-left">購入者</th>
+          <th class="px-6 py-3 border-b text-left">商品</th>
+          <th class="px-6 py-3 border-b text-left">金額</th>
+          <th class="px-6 py-3 border-b text-left">ステータス</th>
+          <th class="px-6 py-3 border-b text-left">注文日</th>
         </tr>
       </thead>
       <tbody>
-        <% @ebay_orders.each do |order| %>
-          <tr>
-            <td><%= order.order_id %></td>
-            <td><%= order.buyer_username %></td>
-            <td><%= order.total_price %></td>
-            <td><%= order.order_status %></td>
-            <td><%= order.created_date %></td>
-            <td>
-              <%= link_to '詳細', ebay_order_path(order.order_id), class: 'btn btn-primary btn-sm' %>
+        <% @orders.each do |order| %>
+          <tr class="hover:bg-gray-50">
+            <td class="px-6 py-4 border-b"><%= order["orderId"] %></td>
+            <td class="px-6 py-4 border-b">
+              <%= order.dig("buyer", "username") %>
+            </td>
+            <td class="px-6 py-4 border-b">
+              <% order["lineItems"].each do |item| %>
+                <div class="mb-2">
+                  <%= item["title"] %> (<%= item["quantity"] %>個)
+                </div>
+              <% end %>
+            </td>
+            <td class="px-6 py-4 border-b">
+              <%= number_to_currency(order.dig("total", "value"), unit: order.dig("total", "currency")) %>
+            </td>
+            <td class="px-6 py-4 border-b">
+              <%= order["orderFulfillmentStatus"] %>
+            </td>
+            <td class="px-6 py-4 border-b">
+              <%= Time.zone.parse(order["creationDate"]).strftime("%Y/%m/%d %H:%M") %>
             </td>
           </tr>
         <% end %>
@@ -30,7 +48,9 @@
     </table>
   </div>
 
-  <div class="mt-4">
-    <%= paginate @ebay_orders %>
-  </div>
+  <% if @orders.empty? %>
+    <div class="text-center py-8 text-gray-600">
+      注文が見つかりませんでした
+    </div>
+  <% end %>
 </div>
